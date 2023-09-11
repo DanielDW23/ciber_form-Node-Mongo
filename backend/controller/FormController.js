@@ -6,8 +6,13 @@ import FormLock from "../model/FormModel.js";
 
 export const createForm = async (req, res) =>{
     // console.log (req.body)
-    const {Email, Name, Subject, Message} = req.body
-    if (!Email || !Name || !Subject || !Message ){
+    const {email, name, subject, message, phone, direction} = req.body
+    
+    if ( phone || direction ){
+        res.status(500).json ()
+    }
+
+    if (!email || !name || !subject || !message ){
         res.status(400).json ({message: "Todos los campos son requeridos."})
     }
     try {
@@ -43,9 +48,9 @@ export const getForms = async (req,res) =>{
 
 //Actualizar el formulario.
 export const updateForm = async (req, res) => {
-    const {Email, Name, Subject, Message} = req.body
+    const {email, name, subject, message} = req.body
 
-    if(!Email && !Name && !Subject && !Message ) {
+    if(!email && !name && !subject && !message ) {
         res.status(400).json({ message: "Debe proporcionar al menos un campo para actualizar." });
     }
     try {
