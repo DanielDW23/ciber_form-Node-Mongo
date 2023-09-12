@@ -10,6 +10,8 @@ import { rateLimit } from 'express-rate-limit'
 import RedisStore from 'rate-limit-redis'
 import { createClient } from 'redis'
 
+import { createForm } from './controller/FormController.js';
+
 const client = createClient({
     url: 'redis://127.0.0.1:6379'
 })
@@ -36,23 +38,29 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.post('/', limiter, async (req, res) => {
-           console.log('Form received:', req.body);
+app.post('/form', limiter, async (req, res) => {
+        //    console.log('Form received:', req.body);
     const secret_key = process.env.SECRET_KEY_RECAPTCHA_V3;
     const token = req.body["g-recaptcha-response"];
-  
+  try{
     const response = await axios.post(`https://www.google.com/recaptcha/api/siteverify?secret=${secret_key}&response=${token}`);
         console.log('reCAPTCHA response:', response.data);
   
     if (response.data.success) {
         console.log("CAPTCHA Verification: correcta");
-        
+        await createForm(req, res);
     } 
     else {
       
       res.status(400).send("reCAPTCHA failed validation!");
     }
-  });
+
+} catch (error) {
+    console.error("Error al validar reCAPTCHA:", error);
+    res.status(500).send("Error al validar reCAPTCHA");
+  };
+
+})
 
 app.use('/form', FormRouter);
 

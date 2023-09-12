@@ -1,12 +1,27 @@
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
 import "./FormLogin.css";
 
-export default function FormLogin() {
+import { useContext, useState } from "react";
+import { AuthContext } from "../AuthContext"
+
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { login } = useContext(AuthContext);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // Fake network request for JWT token
+    const jwtToken = "fake-jwt-token";
+    login(jwtToken);
+  };
+
+
   return (
     <div>
       <Container>
         <Row className="vh-100 d-flex justify-content-center align-items-center">
-          <Col xl={12}  md={12} lg={12} xs={12}>
+          <Col xl={12} md={12} lg={12} xs={12}>
             <div className="border border-3 border-primary "></div>
             <Card className="shadow">
               <Card.Body>
@@ -14,12 +29,13 @@ export default function FormLogin() {
                   <h2 className="fw-bold mb-2 text-uppercase ">Login Panel</h2>
                   <p className=" mb-5"></p>
                   <div className="mb-3">
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label className="text-center">
                           Email address
                         </Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Control type="email" placeholder="Enter email" value={email}
+                          onChange={(e) => setEmail(e.target.value)} />
                       </Form.Group>
 
                       <Form.Group
@@ -27,7 +43,8 @@ export default function FormLogin() {
                         controlId="formBasicPassword"
                       >
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control type="password" placeholder="Password" value={password}
+                          onChange={(e) => setPassword(e.target.value)} />
                       </Form.Group>
                       <Form.Group
                         className="mb-3"
@@ -63,3 +80,5 @@ export default function FormLogin() {
     </div>
   );
 }
+
+export default Login;
