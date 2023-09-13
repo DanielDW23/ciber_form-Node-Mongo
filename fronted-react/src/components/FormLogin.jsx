@@ -7,13 +7,13 @@ import { AuthContext } from "../AuthContext"
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login } = useContext(AuthContext);
+  const { value } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     // Fake network request for JWT token
     const jwtToken = "fake-jwt-token";
-    login(jwtToken);
+    value.login(jwtToken);
   };
 
 

@@ -6,6 +6,7 @@ import FormLogin from './components/FormLogin.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { AuthProvider } from "./AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,9 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+  <AuthProvider>
   <React.StrictMode>
     <RouterProvider router={router}/>
   </React.StrictMode>,
+  </AuthProvider>
 )
