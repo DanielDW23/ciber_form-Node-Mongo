@@ -1,22 +1,15 @@
 import { useContext } from "react";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../AuthContext";
 
-function Home() {
-  const { isLoggedIn, logout } = useContext(AuthContext);
+function Dashboard() {
+  const { token } = useContext(AuthContext);
 
   return (
     <div>
-      <h1>Home</h1>
-      {isLoggedIn ? (
-        <>
-          <p>Welcome! You are logged in.</p>
-          <button onClick={logout}>Logout</button>
-        </>
-      ) : (
-        <p>Please log in to access more features.</p>
-      )}
+      <h1>Profile</h1>
+      <p>Your secret token is: {token}</p>
     </div>
   );
 }
 
-export default Home;
+export default Dashboard;

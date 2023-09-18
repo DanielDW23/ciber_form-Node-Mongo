@@ -1,7 +1,7 @@
 import express from 'express';
 import db from './database/db.js';
 import axios from 'axios';
-import FormRouter from './routes/FormRoutes.js';
+import formRouter from './routes/formRoutes.js';
 import cors from 'cors';
 
 import 'dotenv/config';
@@ -10,7 +10,7 @@ import { rateLimit } from 'express-rate-limit'
 import RedisStore from 'rate-limit-redis'
 import { createClient } from 'redis'
 
-import { createForm } from './controller/FormController.js';
+import { createForm } from './controller/formController.js';
 
 const client = createClient({
     url: 'redis://127.0.0.1:6379'
@@ -62,7 +62,7 @@ app.post('/form', limiter, async (req, res) => {
 
 })
 
-app.use('/form', FormRouter);
+app.use('/form', formRouter);
 
 app.listen(8000, () => {
     console.log('Servidor iniciado en el puerto 8000');

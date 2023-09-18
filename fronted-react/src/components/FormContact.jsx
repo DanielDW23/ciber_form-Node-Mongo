@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import './FormContact.css';
+import { Link } from "react-router-dom";
 
 
 const schema = Yup.object().shape({
@@ -53,6 +54,7 @@ export const FormContact = () => {
   );
 
   return (
+    <>
     <div className="contactForm">
       <h2>Contact Us</h2>
       <form onSubmit={handleSubmit}>
@@ -124,6 +126,8 @@ export const FormContact = () => {
 
       </form>
     </div>
+      <Link to="/entrando_al_tunel23" class="linkLogin">&#46;</Link>
+    </>
   );
 };
 

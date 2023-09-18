@@ -1,12 +1,12 @@
 import express from 'express';
-import { createForm, deleteform, updateForm, getForms, getFormid } from '../controller/FormController.js';
+import { createForm, deleteform, updateForm, getForms, getFormid } from '../controller/formController.js';
 
-const FormRouter = express.Router();
+const formRouter = express.Router();
 
-FormRouter.get('/', getForms)
-FormRouter.get('/:id',getFormid )
-FormRouter.post ('/', createForm )
-FormRouter.put ('/:id', updateForm )
-FormRouter.delete ('/:id', deleteform)
+formRouter.get('/', getForms)
+formRouter.get('/:id',getFormid )
+formRouter.post ('/', createForm )
+formRouter.put ('/:id', updateForm )
+formRouter.delete ('/:id', deleteform)
 
-export default FormRouter
+export default formRouter
