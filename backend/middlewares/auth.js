@@ -8,7 +8,7 @@ const secret = libjwt.secret;
 
 // Funcion de autenticacion
 exports.authAdmin = (req, res, next) => {
-  // Comprobar si me llega la cabezera de auth
+  // Comprobar si me llega la cabecera de auth
   if (!req.headers.authorization) {
     return res.status(403).send({
       status: "error",

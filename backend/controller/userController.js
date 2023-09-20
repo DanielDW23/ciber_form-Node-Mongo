@@ -1,17 +1,14 @@
-import FormLock from "../model/formModel.js";
+import User from "../models/userModel.js";
 
 //Crud (crear, leer, actualizar, borrar)
 
 //crear
 
-export const createForm = async (req, res) =>{
+export const createUser = async (req, res) =>{
     // console.log (req.body)
-    const {email, name, subject, message, phone, direction} = req.body
+    const {name, surname, nick, email, password, roles} = req.body
     
-    if ( phone || direction ){
-        res.status(500).json ()
-    }
-
+   
     if (!email || !name || !subject || !message ){
         res.status(400).json ({message: "Todos los campos son requeridos."})
     }
@@ -25,7 +22,7 @@ export const createForm = async (req, res) =>{
 };
 
 //traer un formulario con su id
-export const getFormid = async (req,res) =>{
+export const getUserid = async (req,res) =>{
     try {
         const id = req.params.id 
         const form =await FormLock.findById(id)
@@ -47,7 +44,7 @@ export const getForms = async (req,res) =>{
 }
 
 //Actualizar el formulario.
-export const updateForm = async (req, res) => {
+export const updateUser = async (req, res) => {
     const {email, name, subject, message} = req.body
 
     if(!email && !name && !subject && !message ) {
@@ -66,7 +63,7 @@ export const updateForm = async (req, res) => {
 }
 
 //borrar
-export const deleteform = async (req, res) =>{
+export const deleteUser = async (req, res) =>{
     try {
         const id = req.params.id
         const form = await FormLock.deleteOne({_id: id});
