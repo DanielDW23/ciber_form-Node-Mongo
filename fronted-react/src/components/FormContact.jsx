@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import './FormContact.css';
+import './css/FormContact.css';
 import { Link } from "react-router-dom";
 
 
@@ -126,7 +126,7 @@ export const FormContact = () => {
 
       </form>
     </div>
-      <Link to="/entrando_al_tunel23" class="linkLogin">&#46;</Link>
+      <Link to="/entrando_al_tunel23" className="linkLogin">&#46;</Link>
     </>
   );
 };

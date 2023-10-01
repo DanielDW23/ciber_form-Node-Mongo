@@ -4,7 +4,7 @@ import './index.css'
 import FormContact from './components/FormContact.jsx'
 import FormLogin from './components/FormLogin.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Dashboard from './components/DashBoard'
+import Dashboard from './components/Dashboard'
 import RouteGuard from './components/RouteGuard'
 
 // import { createBrowserRouter, RouterProvider } from "react-router-dom";

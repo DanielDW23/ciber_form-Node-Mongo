@@ -1,4 +1,4 @@
-import FormLock from "../model/formModel.js";
+import FormLock from "../models/formModel.js";
 
 //Crud (crear, leer, actualizar, borrar)
 

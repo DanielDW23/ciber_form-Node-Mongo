@@ -30,6 +30,7 @@ function AuthProvider({ children }) {
 
   const authValue = {
     isLoggedIn,
+    jwt,
     isLoading,
     login,
     logout,

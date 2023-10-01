@@ -1,34 +1,31 @@
-const jwt = require('jsonwebtoken');
-
-// const jwt = require("jwt-simple");
-
-const moment = require("moment");
+import jwt from 'jsonwebtoken';
+import moment from 'moment';
 import 'dotenv/config';
+
 //definir clave secreta
 
-const secret = process.env.SECRET_KEY_TOKEN;
+if (!process.env.SECRET_KEY_TOKEN) {
+  throw new Error('SECRET_KEY_TOKEN no está definido en el fichero .env ');
+}
 
-//crear funcion para generar tokens
 
-const createToken = async (user) => {
+export const secret_value = process.env.SECRET_KEY_TOKEN;
+
+//crear función para generar tokens
+
+export const createToken =  (user) => {
   const payload = {
     id: user._id,
-    name: user.name,
-    surname: user.surname,
     nick: user.nick,
-    email: user.email,
     role: user.role,
+    name: user.name,
     iat: moment().unix(),
     exp: moment().add(30, "days").unix(),
   };
 
-  //devolver jwt token codificado
-  console.log(user.role);
-  const jwttoken = await jwt.encode(payload, secret);
+  //devolver jwt token codificado 
+ 
+  const jwttoken = jwt.sign(payload, secret_value);
   return jwttoken;
 };
 
-module.exports = {
-  secret,
-  createToken,
-};

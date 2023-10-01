@@ -1,16 +1,19 @@
 // importar modulos
-const jwt = require("jsonwebtoken");
-const moment = require("moment");
+import jwt from 'jsonwebtoken';
+import moment from 'moment';
+import User from '../models/userModel.js';
+
 
 // importar clave secreta
-const libjwt = require("../libs/jwt");
-const secret = libjwt.secret;
+import { secret_value } from '../libs/jwt.js';
+const secret = secret_value;
 
 // Funcion de autenticacion
-exports.authAdmin = (req, res, next) => {
+export const authRole = (role) => {
+  return (req, res, next) => {
   // Comprobar si me llega la cabecera de auth
   if (!req.headers.authorization) {
-    return res.status(403).send({
+    return res.status(401).send({
       status: "error",
       message: "La petición no tiene la cabecera de autenticación",
     });
@@ -23,7 +26,7 @@ exports.authAdmin = (req, res, next) => {
   try {
     jwt.verify(token, secret, (err, payload) => {
       if (err) {
-        return res.status(404).send({
+        return res.status(401).send({
           status: "error",
           message: "Token inválido",
         });
@@ -36,26 +39,47 @@ exports.authAdmin = (req, res, next) => {
           message: "Token expirado",
         });
       }
-
+     
       // Verificar el campo 'role' en el payload
-      if (payload.role !== "admin") {
+      if (payload.role !== role) {
         return res.status(403).send({
           status: "error",
           message:
-            "Acceso no autorizado para usuarios que no son administradores",
+            `Acceso no autorizado para usuarios que no son ${role}`,
         });
+      
       }
 
+      User.findById(payload._id).exec((err, user) => {
+        if (err || !user) {
+            return res.status(400).send({
+                status: "error",
+                message: "Error al buscar el usuario",
+            });
+        }
+
+        if (user.role !== role) {
+            return res.status(403).send({
+                status: "error",
+                message: "Acceso no autorizado",
+            });
+        }
+
+      
       // Si todo está bien, puedes asignar los datos de usuario al objeto 'req' si lo necesitas
-      req.user = payload;
+        req.user = payload;
 
       // Continuar con la solicitud
-      next();
+        next();
+
     });
+
+  });
+    
   } catch (error) {
-    return res.status(500).send({
+    return res.status(400).send({
       status: "error",
       message: "Error al verificar el token",
     });
   }
-};
+}};
