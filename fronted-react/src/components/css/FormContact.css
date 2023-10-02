@@ -103,5 +103,7 @@ input , textarea {
 
 .linkLogin {
     text-decoration: none;
-    color: rgb(237, 173, 117);
+    /* color: rgb(237, 173, 117); */
+    /* margin-top: 30PX; */
+    margin-right: 20px;
 }

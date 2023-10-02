@@ -42,7 +42,7 @@ app.use(cors());
 
 import { createForm } from './controller/formController.js';
 
-app.post('/form', limiter2, recaptchaMiddleware, async (req, res) => {
+app.post('/form', /*limiter2,*/ recaptchaMiddleware, async (req, res) => {
     await createForm(req, res);
 });
 

@@ -5,7 +5,7 @@ import { limiter5 } from '../middlewares/rateLimiter.js';
 
 const userRouter = Router();
 
-userRouter.post('/login', limiter5, userController.loginUser);
+userRouter.post('/login', /*limiter5,*/ userController.loginUser);
 userRouter.post('/', authRole("admin"), userController.createUser);
 userRouter.get('/', authRole("admin"), userController.getUsers);
 userRouter.get('/:id', authRole("admin"), userController.getUserId);

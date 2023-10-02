@@ -1,4 +1,4 @@
-import { Col, Button, Row, Container, Card, Form, InputGroup} from "react-bootstrap";
+import { Col, Button, Row, Container, Card, Form, InputGroup } from "react-bootstrap";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import './css/FormLogin.css';
 
@@ -7,16 +7,38 @@ import { AuthContext } from "../AuthContext";
 import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+const schema = Yup.object().shape({
+    email: Yup.string().max(50, "Máximo 50 caracteres").matches(
+        /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/, 'Email inválido').required("El email es obligatorio"),
+    password: Yup.string().required("El password es obligatorio"),
+})
+
 
 function Login() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("");
     const { login, isLoggedIn } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
 
     const handlePasswordVisibility = () => {
-        setShowPassword(!showPassword); 
+        setShowPassword(!showPassword);
     };
+
+    const formik = useFormik(
+        {
+            initialValues: {
+                email: '',
+                password: ''
+            },
+            validationSchema: schema,
+            onSubmit: async (values) => {
+                handleSubmit(values);
+            },
+
+        });
 
     // const handleSubmit = async (event) => {
     //     event.preventDefault();
@@ -25,38 +47,38 @@ function Login() {
     //     login(jwtToken);
     // };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        
+    const handleSubmit = async (values) => {
         try {
             const response = await fetch('http://127.0.0.1:8000/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ email, password })
+                body: JSON.stringify( values ) // Aquí enviamos directamente los values del formulario.
             });
-            
+
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-            
+
             const data = await response.json(); // Asume que el servidor responde con un json.
-            
+
             // Asume que el servidor responde con un objeto que tiene un token JWT.
             login(data.token);
         } catch (error) {
             console.error('Fetch error: ' + error.message);
             // Puedes configurar un estado para manejar errores y mostrar un mensaje al usuario.
         }
+
     };
+
 
     if (isLoggedIn) {
         return <Navigate to="/dashboard" />;
 
     }
 
-    
+
 
     return (
         <div>
@@ -70,29 +92,35 @@ function Login() {
                                     <h2 className="fw-bold mb-2 text-uppercase ">Login Panel</h2>
                                     <p className=" mb-5"></p>
                                     <div className="mb-3">
-                                        <Form onSubmit={handleSubmit}>
+                                        <Form onSubmit={formik.handleSubmit}>
                                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                                 <Form.Label className="text-center">
                                                     Email address
                                                 </Form.Label>
-                                                <Form.Control type="email" placeholder="Enter email" value={email}
-                                                    onChange={(e) => setEmail(e.target.value)} />
+                                                <Form.Control type="email" placeholder="Enter email" onChange={formik.handleChange}
+                                                    onBlur={formik.handleBlur}
+                                                    value={formik.values.email}
+                                                    name="email" />
+                                                {formik.touched.email && formik.errors.email && <span>{formik.errors.email}</span>}
                                             </Form.Group>
 
+
                                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <InputGroup>
-                            <Form.Control 
-                                type={showPassword ? "text" : "password"} // Cambiando el tipo de input dinámicamente
-                                placeholder="Password" 
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)} 
-                            />
-                            <InputGroup.Text onClick={handlePasswordVisibility}>
-                                {showPassword ? <FaEyeSlash /> : <FaEye />} {/* Renderizando el icono basado en el estado showPassword */}
-                            </InputGroup.Text>
-                        </InputGroup>
-                    </Form.Group>
+                                                <Form.Label>Password</Form.Label>
+                                                <InputGroup>
+                                                    <Form.Control
+                                                        type={showPassword ? "text" : "password"} // Cambiando el tipo de input dinámicamente
+                                                        placeholder="Password"
+                                                        onChange={formik.handleChange}
+                                                        onBlur={formik.handleBlur}
+                                                        value={formik.values.password}
+                                                        name="password"
+                                                    />
+                                                    <InputGroup.Text onClick={handlePasswordVisibility}>
+                                                        {showPassword ? <FaEyeSlash /> : <FaEye />} {/* Renderizando el icono basado en el estado showPassword */}
+                                                    </InputGroup.Text>
+                                                </InputGroup>
+                                            </Form.Group>
                                             <Form.Group
                                                 className="mb-3"
                                                 controlId="formBasicCheckbox"
@@ -109,12 +137,12 @@ function Login() {
                                                 </Button>
                                             </div>
                                         </Form>
-                                   
+
                                     </div>
                                 </div>
                             </Card.Body>
                         </Card>
-                    <Link to="/" className="linkForm">&#8617;  Volver al formulario</Link>
+                        <Link to="/" className="linkForm">&#8617;  Volver al formulario</Link>
                     </Col>
                 </Row>
             </Container>

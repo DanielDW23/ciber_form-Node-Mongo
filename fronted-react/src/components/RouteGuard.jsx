@@ -10,7 +10,7 @@ function RouteGuard({ children }) {
   }
 
   if (!isLoggedIn) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/entrando_al_tunel23" />;
   }
 
   return children; 

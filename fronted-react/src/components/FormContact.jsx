@@ -17,7 +17,7 @@ const schema = Yup.object().shape({
 export const FormContact = () => {
   const submitForm = (values) => {
     grecaptcha.ready(function () {
-      grecaptcha.execute('6LfzvQsoAAAAAHgBkkl9KJGR-73CsRlGdbTUfqqq', { action: 'submit' }).then(function (token) {
+      grecaptcha.execute('6Ldix2koAAAAAMoeIF5Bbix3m2PQI-Nwa3cLn20j', { action: 'submit' }).then(function (token) {
 
         values["g-recaptcha-response"] = token;
         
@@ -126,7 +126,7 @@ export const FormContact = () => {
 
       </form>
     </div>
-      <Link to="/entrando_al_tunel23" className="linkLogin">&#46;</Link>
+      <Link to="/entrando_al_tunel23" className="linkLogin">ADMIN</Link>
     </>
   );
 };
