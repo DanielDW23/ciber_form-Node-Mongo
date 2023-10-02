@@ -1,40 +1,75 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext,  useState, useEffect } from "react";
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [jwt, setJwt] = useState(null);
+  const [jwt, setJwt] = useState(localStorage.getItem("jwt"));
   const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
+    const storedUser = localStorage.getItem("user");
     const storedJwt = localStorage.getItem("jwt");
-    if (storedJwt) {
+
+    if (storedUser && storedJwt) {
       setIsLoggedIn(true);
-      setJwt(storedJwt);
+      setUser(JSON.parse(storedUser));
     }
     setIsLoading(false);
   }, []);
 
-  function login(token) {
+  const login = (token, userData) => {
     setIsLoggedIn(true);
-    setJwt(token);
+    setUser(userData);
     localStorage.setItem("jwt", token);
-  }
+    localStorage.setItem("user", JSON.stringify(userData));
+  };
 
-  function logout() {
+  const logout = () => {
     setIsLoggedIn(false);
-    setJwt(null);
+    setUser(null);
     localStorage.removeItem("jwt");
-  }
+    localStorage.removeItem("user");
+  };
 
   const authValue = {
     isLoggedIn,
     isLoading,
-    jwt,
+    user,
     login,
     logout,
+    jwt
   };
+
+  // useEffect(() => {
+  //   const storedJwt = localStorage.getItem("jwt");
+  //   if (storedJwt) {
+  //     setIsLoggedIn(true);
+  //     setJwt(storedJwt);
+  //   }
+  //   setIsLoading(false);
+  // }, []);
+
+  // function login(token) {
+  //   setIsLoggedIn(true);
+  //   setJwt(token);
+  //   localStorage.setItem("jwt", token);
+  // }
+
+  // function logout() {
+  //   setIsLoggedIn(false);
+  //   setJwt(null);
+  //   localStorage.removeItem("jwt");
+  // }
+
+  // const authValue = {
+  //   isLoggedIn,
+  //   isLoading,
+  //   jwt,
+  //   login,
+  //   logout,
+  // };
 
   return <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>;
 }

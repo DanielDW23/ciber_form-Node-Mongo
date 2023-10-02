@@ -5,11 +5,11 @@ function Home() {
   const { isLoggedIn, logout } = useContext(AuthContext);
 
   return (
-    <div>
+    <div style = {{ marginBottom: '25px'}}>
       <h1>Home</h1>
       {isLoggedIn ? (
         <>
-          <p>Welcome! You are logged in.</p>
+          <p>Welcome! You are logged.</p>
           <button onClick={logout}>Logout</button>
         </>
       ) : (

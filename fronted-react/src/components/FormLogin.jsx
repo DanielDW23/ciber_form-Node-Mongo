@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
+import jwtDecode from 'jwt-decode';
+
 const schema = Yup.object().shape({
     email: Yup.string().max(50, "Máximo 50 caracteres").matches(
         /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/, 'Email inválido').required("El email es obligatorio"),
@@ -20,7 +22,7 @@ const schema = Yup.object().shape({
 function Login() {
     // const [email, setEmail] = useState("");
     // const [password, setPassword] = useState("");
-    const { login, isLoggedIn } = useContext(AuthContext);
+    const { login, isLoggedIn, user } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
 
     const handlePasswordVisibility = () => {
@@ -64,7 +66,10 @@ function Login() {
             const data = await response.json(); // Asume que el servidor responde con un json.
 
             // Asume que el servidor responde con un objeto que tiene un token JWT.
-            login(data.token);
+            const user = jwtDecode(data.token);
+        
+            login(data.token, user);
+
         } catch (error) {
             console.error('Fetch error: ' + error.message);
             // Puedes configurar un estado para manejar errores y mostrar un mensaje al usuario.
@@ -74,8 +79,11 @@ function Login() {
 
 
     if (isLoggedIn) {
-        return <Navigate to="/dashboard" />;
-
+        if (user && user.role === 'admin') {
+            return <Navigate to="/admin_dashboard" />;
+        } else {
+            return <Navigate to="/user_dashboard" />;
+        }
     }
 
 
@@ -89,7 +97,7 @@ function Login() {
                         <Card className="shadow">
                             <Card.Body>
                                 <div className="mb-3 mt-md-4">
-                                    <h2 className="fw-bold mb-2 text-uppercase ">Login Panel</h2>
+                                    <h2 className="fw-bold mb-2 text-uppercase text-center">Login Panel</h2>
                                     <p className=" mb-5"></p>
                                     <div className="mb-3">
                                         <Form onSubmit={formik.handleSubmit}>

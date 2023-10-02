@@ -4,14 +4,15 @@ import './index.css'
 import FormContact from './components/FormContact.jsx'
 import FormLogin from './components/FormLogin.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Dashboard from './components/Dashboard'
+import User_dashboard from './components/User_dashboard'
+import Admin_dashboard from './components/Admin_dashboard'
 import RouteGuard from './components/RouteGuard'
 
 // import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./AuthContext";
 
-// const router = createBrowserRouter([
+// const router = createBrowserRouter([a
 //   {
 //     path: "/",
 //     element: <FormContact />
@@ -33,7 +34,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path="/" element={<FormContact />} />
           <Route path="/entrando_al_tunel23" element={<FormLogin />} />
-          <Route path="/dashboard" element={<RouteGuard><Dashboard /></RouteGuard>} />
+          <Route path="/user_dashboard" element={<RouteGuard><User_dashboard/></RouteGuard>} />
+          <Route path="/admin_dashboard" element={<RouteGuard><Admin_dashboard/></RouteGuard>} />
         </Routes>
       </BrowserRouter >
     </React.StrictMode>
