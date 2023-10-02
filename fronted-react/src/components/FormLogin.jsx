@@ -20,8 +20,6 @@ const schema = Yup.object().shape({
 
 
 function Login() {
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
     const { login, isLoggedIn, user } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
 
@@ -42,12 +40,6 @@ function Login() {
 
         });
 
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
-    //     // Fake network request for JWT token
-    //     const jwtToken = "fake-jwt-token";
-    //     login(jwtToken);
-    // };
 
     const handleSubmit = async (values) => {
         try {
@@ -56,7 +48,7 @@ function Login() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify( values ) // Aquí enviamos directamente los values del formulario.
+                body: JSON.stringify(values) // Aquí enviamos directamente los values del formulario.
             });
 
             if (!response.ok) {
@@ -67,7 +59,7 @@ function Login() {
 
             // Asume que el servidor responde con un objeto que tiene un token JWT.
             const user = jwtDecode(data.token);
-        
+
             login(data.token, user);
 
         } catch (error) {

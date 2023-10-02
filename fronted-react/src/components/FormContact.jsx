@@ -20,7 +20,7 @@ export const FormContact = () => {
       grecaptcha.execute('6Ldix2koAAAAAMoeIF5Bbix3m2PQI-Nwa3cLn20j', { action: 'submit' }).then(function (token) {
 
         values["g-recaptcha-response"] = token;
-        
+
         fetch('http://127.0.0.1:8000/form', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -55,77 +55,77 @@ export const FormContact = () => {
 
   return (
     <>
-    <div className="contactForm">
-      <h2>Contact Us</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="formContainerFirstLine">
-          <div className="formFirstLine">
-            <input
-              type='email'
-              placeholder='Your e-mail'
-              name='email'
-              value={values.email}
-              onChange={handleChange}
-              autoComplete='off'
-            />
-            <br />
-            {errors.email && <span>{errors.email}</span>}
+      <div className="contactForm">
+        <h2>Contact Us</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="formContainerFirstLine">
+            <div className="formFirstLine">
+              <input
+                type='email'
+                placeholder='Your e-mail'
+                name='email'
+                value={values.email}
+                onChange={handleChange}
+                autoComplete='off'
+              />
+              <br />
+              {errors.email && <span>{errors.email}</span>}
+            </div>
+            <div className="formFirstLine">
+              <input
+                type='text'
+                placeholder='Your name'
+                name='name'
+                value={values.name}
+                onChange={handleChange}
+                autoComplete='off'
+              />
+              <br />
+              {errors.name && <span>{errors.name}</span>}
+            </div>
           </div>
-          <div className="formFirstLine">
+          <div className="formSecondLine">
             <input
               type='text'
-              placeholder='Your name'
-              name='name'
-              value={values.name}
+              placeholder='Subject'
+              name='subject'
+              value={values.subject}
               onChange={handleChange}
               autoComplete='off'
             />
-            <br />
-            {errors.name && <span>{errors.name}</span>}
+            {errors.subject && <span>{errors.subject}</span>}
           </div>
-        </div>
-        <div className="formSecondLine">
+
+          <div className="formThirdLine">
+            <textarea
+              placeholder='Your message'
+              name='message'
+              value={values.message}
+              onChange={handleChange}
+              autoComplete='off'
+            />
+            {errors.message && <span>{errors.message}</span>}
+          </div>
+
           <input
-            type='text'
-            placeholder='Subject'
-            name='subject'
-            value={values.subject}
+            type='hidden'
+            name='phone'
+            value={values.phone}
             onChange={handleChange}
-            autoComplete='off'
           />
-          {errors.subject && <span>{errors.subject}</span>}
-        </div>
-
-        <div className="formThirdLine">
-          <textarea
-            placeholder='Your message'
-            name='message'
-            value={values.message}
+          <input
+            type='hidden'
+            name='direction'
+            value={values.direction}
             onChange={handleChange}
-            autoComplete='off'
           />
-          {errors.message && <span>{errors.message}</span>}
-        </div>
 
-        <input
-          type='hidden'
-          name='phone'
-          value={values.phone}
-          onChange={handleChange}
-        />
-        <input
-          type='hidden'
-          name='direction'
-          value={values.direction}
-          onChange={handleChange}
-        />
+          <button className="btnSend" type='submit'>ENVIAR</button>
 
-        <button className="btnSend" type='submit'>ENVIAR</button>
+          <br />
 
-        <br />
-
-      </form>
-    </div>
+        </form>
+      </div>
       <Link to="/entrando_al_tunel23" className="linkLogin">ADMIN</Link>
     </>
   );

@@ -5,13 +5,14 @@ function Home() {
   const { isLoggedIn, logout } = useContext(AuthContext);
 
   return (
-    <div style = {{ marginBottom: '25px'}}>
-      <h1>Home</h1>
+    
+    <div style={{ marginBottom: '25px', display:'flex', justifyContent: 'flex-end' , margin:'25px' }}>
+     
       {isLoggedIn ? (
-        <>
-          <p>Welcome! You are logged.</p>
-          <button onClick={logout}>Logout</button>
-        </>
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center', textAlign: 'center'}}>
+          <h4>Welcome!<br/> You are logged.</h4>
+          <button onClick={logout} style={{borderRadius:'5px'}}>Logout</button>
+        </div>
       ) : (
         <p>Please log in to access more features.</p>
       )}

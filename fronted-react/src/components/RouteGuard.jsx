@@ -13,7 +13,7 @@ function RouteGuard({ children }) {
     return <Navigate to="/entrando_al_tunel23" />;
   }
 
-  return children; 
+  return children;
 }
 
 export default RouteGuard;
