@@ -15,6 +15,7 @@ function AuthProvider({ children }) {
     if (storedUser && storedJwt) {
       setIsLoggedIn(true);
       setUser(JSON.parse(storedUser));
+      setJwt(storedJwt);
     }
     setIsLoading(false);
   }, []);
@@ -22,6 +23,7 @@ function AuthProvider({ children }) {
   const login = (token, userData) => {
     setIsLoggedIn(true);
     setUser(userData);
+    setJwt(token);
     localStorage.setItem("jwt", token);
     localStorage.setItem("user", JSON.stringify(userData));
   };
@@ -29,6 +31,7 @@ function AuthProvider({ children }) {
   const logout = () => {
     setIsLoggedIn(false);
     setUser(null);
+    setJwt(null);
     localStorage.removeItem("jwt");
     localStorage.removeItem("user");
   };

@@ -95,11 +95,11 @@ function AdminDashboard() {
 
   return (
     <>
-      <div>
+      <div style ={{marginTop: '30px'}}>
         <Home />
-        <h1 style={{ textAlign: 'center' }}>ADMIN PANEL</h1>
+        <h1 style={{ textAlign: 'center', padding: '20px 0 20px 0' }}>ADMIN PANEL</h1>
         <Button onClick={() => handleShowModal(null)} style={{ marginBottom: '6px' }}>Create User</Button>
-        <Table striped bordered hover>
+        <Table striped bordered hover >
           <thead>
             <tr>
               <th>Name</th>
@@ -137,7 +137,7 @@ function AdminDashboard() {
                 <Form.Control type="text" placeholder="Enter surname" value={form.surname} onChange={e => setForm({ ...form, surname: e.target.value })} />
               </Form.Group>
               <Form.Group controlId="formNick">
-                <Form.Label>Surname</Form.Label>
+                <Form.Label>Nick</Form.Label>
                 <Form.Control type="text" placeholder="Enter nick" value={form.nick} onChange={e => setForm({ ...form, nick: e.target.value })} />
               </Form.Group>
               <Form.Group controlId="formEmail">

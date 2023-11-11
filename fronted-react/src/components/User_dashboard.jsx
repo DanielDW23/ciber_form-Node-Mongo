@@ -49,8 +49,8 @@ function User_dashboard() {
   }
 
   return (
-    <div>
-      <Home />
+    <div style={{ width: '100%', marginTop: '30px' }}>
+      <Home/>
       <h1 style={{ textAlign: 'center' }}>USER PANEL</h1>
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
         {forms === null ? <p>Loading forms...</p> :

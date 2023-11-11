@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 
 
 const schema = Yup.object().shape({
-  email: Yup.string().max(100, "Máximo 100 caracteres").matches(
-    /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/, 'Email inválido').required("El email es obligatorio"),
-  name: Yup.string().max(80, "Máximo 80 caracteres").matches(/^[a-zA-Z]*$/, 'Solo se permiten letras').required("El nombre es obligatorio"),
-  subject: Yup.string().max(120, "Máximo 120 caracteres").required("El asunto es obligatorio"),
-  message: Yup.string().max(400, "Máximo 400 caracteres").required("El mensaje es obligatorio"),
+  email: Yup.string().max(100, "Maximum 100 characters").matches(
+    /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/, 'Invalid email').required("Email is required"),
+  name: Yup.string().max(80, "Maximum 80 characters").matches(/^[a-zA-ZáéíóúüÁÉÍÓÚÜñÑ]*$/, 'Only letters are allowed').required("Name is required"),
+  subject: Yup.string().max(120, "Maximum 120 characters").required("Subject is required"),
+  message: Yup.string().max(400, "Maximum 400 characters").required("Message is required"),
   phone: Yup.string().max(0),
   direction: Yup.string().max(0)
 });
@@ -54,7 +54,8 @@ export const FormContact = () => {
   );
 
   return (
-    <>
+    <> 
+      <h1 className='title' >SECURED CONTACT FORM</h1>
       <div className="contactForm">
         <h2>Contact Us</h2>
         <form onSubmit={handleSubmit}>
@@ -120,7 +121,7 @@ export const FormContact = () => {
             onChange={handleChange}
           />
 
-          <button className="btnSend" type='submit'>ENVIAR</button>
+          <button className="btnSend" type='submit'>SEND</button>
 
           <br />
 

@@ -10,7 +10,14 @@ body {
   background-color: rgb(237, 173, 117) !important;
 }
 
+.title {
+  margin: auto;
+  margin-top: 40px;
+  text-align: center;
+}
+
 .contactForm {
+  margin-top: 100px;
   width: 40vw;
   border: 2px solid;
   padding: 15px;
