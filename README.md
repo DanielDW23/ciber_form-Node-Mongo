@@ -13,29 +13,29 @@ Se debe entregar una solución que aporte lo siguiente:
 1- Se debe desarrollar un clon de la página de contacto de rovikron utilizando React Js.
 
 Se debe implementar: 
-- ReCaptcha de Google para el formulario.
-- Implementar 2 campos ocultos en el formulario.
+- ReCaptcha de Google para el formulario. :heavy_check_mark:
+- Implementar 2 campos ocultos en el formulario. :heavy_check_mark:
 - Sistema de validación del lado del cliente para validar que los campos tienen las dimensiones y el formato correcto:
   
-  - **Email:** formato email maximo 100 caracteres,  required,trim,lawurcase, maxleth 100 caracteres, validate con validator
-  - **name:** required,trim,lawurcase, maxleth 80 caracteres, validate con validatoro , solo se permiten letras
-  - **subject:** required,trim,lawurcase, maxleth, validate con validator
-,maxleth 120 caracteres ,solo se permiten letras
+  - **Email:** formato email maximo 100 caracteres,  required,trim,lawurcase, maxleth 100 caracteres, validate con validator :heavy_check_mark:
+  - **name:** required,trim,lawurcase, maxleth 80 caracteres, validate con validatoro , solo se permiten letras :heavy_check_mark:
+  - **subject:** required,trim,lawurcase, maxleth, validate con validator :heavy_check_mark:
+,maxleth 120 caracteres ,solo se permiten letras :heavy_check_mark:
   - **message:**  required,trim,lawurcase, maxleth, validate con validator
-,maxlethmaxleth 400 caracteres máximo ,solo se permiten letras
+,maxlethmaxleth 400 caracteres máximo ,solo se permiten letras :heavy_check_mark:
 
 - Sistema de validación del lado del cliente para protegernos contra Xss y bots.
-  - Validar todos los datos de los diferentes campos escapando las cadenas tipicas utilizadas en Xss e impedir el envío de los campos al servidor.
-  - Comprobar si los campos ocultos han sido cumplimentados e impedir el envío del formulario al servidor para detectar posibles bots.
+  - Validar todos los datos de los diferentes campos escapando las cadenas tipicas utilizadas en Xss e impedir el envío de los campos al servidor. :heavy_check_mark:
+  - Comprobar si los campos ocultos han sido cumplimentados e impedir el envío del formulario al servidor para detectar posibles bots.:heavy_check_mark:
 
 
 2- Se debe crear un panel de administración para acceder a los registros del formulario.
 
-- Existirá una ruta de admin con un login que dará acceso al panel de control.
+- Existirá una ruta de admin con un login que dará acceso al panel de control. :heavy_check_mark:
 - Existirán 2 tipos de usuarios Admin y User 
-  - Admin podrá realizar el crud de los usuarios 
-  - User podrá realizar la visualización de los registros almacenados en la bbdd
-  - Se debe Realizar en React utilizando rutas protegidas y un sistema de roles.Auth context.
+  - Admin podrá realizar el crud de los usuarios :heavy_check_mark:
+  - User podrá realizar la visualización de los registros almacenados en la bbdd :heavy_check_mark:
+  - Se debe Realizar en React utilizando rutas protegidas y un sistema de roles.Auth context. :heavy_check_mark:
 
 ### SERVIDOR:
 	
@@ -44,20 +44,20 @@ Se utilizará Node.js
 Se debe implementar: 
 
 - Formulario: 
-  - Ruta y controlador para almacenar los datos de contacto de los usuarios que cumplimentan el formulario.
-  - Se debe utilizar un ORM para la gestión con la BBDD que podrá ser mongo o cualquiera sql
-  - Se debe validar los campos que vienen del formulario aplicando filtros contra XSS y contra posibles Sqli. Se debe validar que los campos ocultos del formulario no estén cumplimentados devolviendo un error 500 si es necesario.
-  - Se debe aplicar un middleware en la ruta contra posibles ataques de fuerza bruta utilizando la librería express-rate-limit redis limitando el número de peticiones aceptadas por ip en este caso 2.
+  - Ruta y controlador para almacenar los datos de contacto de los usuarios que cumplimentan el formulario. :heavy_check_mark:
+  - Se debe utilizar un ORM para la gestión con la BBDD que podrá ser mongo o cualquiera sql :heavy_check_mark:
+  - Se debe validar los campos que vienen del formulario aplicando filtros contra XSS y contra posibles Sqli. Se debe validar que los campos ocultos del formulario no estén cumplimentados devolviendo un error 500 si es necesario. :heavy_check_mark:
+  - Se debe aplicar un middleware en la ruta contra posibles ataques de fuerza bruta utilizando la librería express-rate-limit redis limitando el número de peticiones aceptadas por ip en este caso 2. :heavy_check_mark:
 https://medium.com/gitconnected/prevent-brute-force-attacks-in-node-js-419367ae35e6
 	
 - Crud administración: 
-  - Rutas para login(email , password)  con 2 roles diferentes admin y user. Se debe implementar JWT para el sistema de login guardando id usuario role y nombre, fecha de expiración.
-  - El admin será único y generado directamente en bbdd.
-  - Rutas para crear editar y eliminar usuarios se deberá validar mediante middleware que el usuario tiene rol admin.
-  - Ruta consulta de registros se deberá validar mediante middleware que el usuario tiene rol usuario.
-  - Todos los usuarios tendrán id nombre apellidos rol email nombre usuario.
-  - Se deberá aplicar hash en las contraseñas para su cifrado.
-  - Se debe aplicar un middleware en la ruta contra posibles ataques de fuerza bruta utilizando la librería express-rate-limit limitando el número de intentos de inicio de sesión aceptadas por ip en este caso 5.
+  - Rutas para login(email , password)  con 2 roles diferentes admin y user. Se debe implementar JWT para el sistema de login guardando id usuario role y nombre, fecha de expiración. :heavy_check_mark:
+  - El admin será único y generado directamente en bbdd. :heavy_check_mark:
+  - Rutas para crear editar y eliminar usuarios se deberá validar mediante middleware que el usuario tiene rol admin. :heavy_check_mark:
+  - Ruta consulta de registros se deberá validar mediante middleware que el usuario tiene rol usuario. :heavy_check_mark:
+  - Todos los usuarios tendrán id nombre apellidos rol email nombre usuario. :heavy_check_mark:
+  - Se deberá aplicar hash en las contraseñas para su cifrado. :heavy_check_mark:
+  - Se debe aplicar un middleware en la ruta contra posibles ataques de fuerza bruta utilizando la librería express-rate-limit limitando el número de intentos de inicio de sesión aceptadas por ip en este caso 5. :heavy_check_mark:
 https://medium.com/gitconnected/prevent-brute-force-attacks-in-node-js-419367ae35e6
 
 ## Tecnologías 
