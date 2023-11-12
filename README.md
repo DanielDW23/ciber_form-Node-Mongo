@@ -79,9 +79,8 @@ https://medium.com/gitconnected/prevent-brute-force-attacks-in-node-js-419367ae3
  <img src="https://github.com/DanielDW23/ciber_form-Node-Mongo/assets/126791645/d53984d5-2709-4f19-9c02-b801f7e059cb" width="750" />
  <img src="https://github.com/DanielDW23/ciber_form-Node-Mongo/assets/126791645/91cd33b2-6e5f-4c54-94b5-9e73a77279ba" width="750" />
     
-  
+  <img src="https://github.com/DanielDW23/ciber_form-Node-Mongo/assets/126791645/61aaee83-887e-4d7b-874d-c5a6a443a634" width="270" />
  <img src="https://github.com/DanielDW23/ciber_form-Node-Mongo/assets/126791645/09d80985-bf93-40e1-9904-783ee5c30fcc" width="270" />
- <img src="https://github.com/DanielDW23/ciber_form-Node-Mongo/assets/126791645/61aaee83-887e-4d7b-874d-c5a6a443a634" width="270" />
  <img src="https://github.com/DanielDW23/ciber_form-Node-Mongo/assets/126791645/bd89d1fb-451e-4c58-9de3-aeb469b29c43" width="270" />
 
 </p>
